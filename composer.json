@@ -1,0 +1,26 @@
+{
+    "name": "numalex/pframex",
+    "description": "framework développé sous php dans le cadre de ma formation OpenClassRoom projet 5",
+    "type": "project",
+    "authors": [
+        {
+            "name": "AxelVllR",
+            "email": "vallieraxel@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src",
+            "Tests\\": "tests"
+        }
+    },
+    "require": {
+        "twig/twig": "^3.2",
+        "twig/extra-bundle": "^3.2",
+        "twig/string-extra": "^3.2",
+        "swiftmailer/swiftmailer": "^6.2"
+    },
+    "require-dev": {
+        "robmorgan/phinx": "^0.12.5"
+    }
+}
