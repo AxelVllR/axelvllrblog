@@ -1,0 +1,23 @@
+{% include 'blocks/block_header.html.twig' %}
+<!-- Intro Section-->
+<section class="intro">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="h3 text-center m-4">Vous n'avez qu'à remplir ce formulaire !</h2>
+                {% if error is defined and error != null %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                {% if success is defined and success != null %}
+                    <div class="alert alert-success" role="alert">
+                        {{ success }}
+                    </div>
+                {% endif %}
+                {{ form | raw }}
+            </div>
+        </div>
+    </div>
+</section>
+{% include 'blocks/block_footer.html.twig' %}

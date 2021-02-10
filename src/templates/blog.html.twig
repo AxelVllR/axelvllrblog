@@ -1,0 +1,34 @@
+{% include 'blocks/block_header.html.twig' %}
+<div class="bg-dark">
+    <h1 class="text-center text-white p-5 m-0">Liste des articles actuellement en ligne sur le blog</h1>
+</div>
+<div class="bg-light p-5">
+    {{ form | raw }}
+    <a href="/blog" class="btn btn-outline-danger btn-sm mr-2">réinitialiser</a>
+</div>
+<div class="bg-dark d-flex justify-content-center align-items-center text-center p-3 mb-5">
+    <h3 class="text-white m-0 p-0">Recherche actuelle : <strong class="text-warning">{{ posts|length }}</strong> résultats</h3>
+</div>
+<div class="container">
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-4">
+            <div class="card m-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.chapo|u.truncate(120) }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><p class="m-0 p-0">Auteur : <span class="font-weight-bold">{{ post.user.username }}</span></p></li>
+                    <li class="list-group-item"><p class="m-0 p-0">Catégorie : <span class="badge badge-warning">{{ post.category.name }}</span></p></li>
+                    <li class="list-group-item"><p class="m-0 p-0">Dernière MAJ : <span class="font-weight-bold">{{ post.updated_at | date('d/m/Y') }}</span></p></li>
+                </ul>
+                <div class="card-body">
+                    <a href="/blog/post-{{ post.id }}" class="card-link btn btn-success">Lire</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% include 'blocks/block_footer.html.twig' %}

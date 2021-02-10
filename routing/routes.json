@@ -1,0 +1,112 @@
+{
+  "/": {
+    "class": "\\App\\Controller\\LandingController",
+    "method": "index"
+  },
+  "/blog": {
+    "class": "\\App\\Controller\\BlogController",
+    "method": "show",
+    "sub_routes": {
+      "name": "/post-{id}",
+      "regex": "post-\\d+",
+      "method": "showPost"
+    }
+  },
+  "/contact": {
+    "class": "\\App\\Controller\\ContactController",
+    "method": "show"
+  },
+  "/contact/send": {
+    "class": "\\App\\Controller\\ContactController",
+    "method": "send"
+  },
+  "/login": {
+    "class": "\\App\\Controller\\AuthController",
+    "method": "login",
+    "session": false
+  },
+  "/sign-in": {
+    "class": "\\App\\Controller\\AuthController",
+    "method": "signIn",
+    "session": false
+  },
+  "/logout": {
+    "class": "\\App\\Controller\\AuthController",
+    "method": "logout"
+  },
+  "/admin": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "show",
+    "role":"ROLE_ADMIN"
+  },
+  "/comment": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "show",
+    "role":"ROLE_ADMIN",
+    "sub_routes": {
+      "name": "/{id}-{bool}",
+      "regex": "\\d+(-)\\d+",
+      "method": "treatComment"
+    }
+  },
+  "/delete-post": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "show",
+    "role":"ROLE_ADMIN",
+    "sub_routes": {
+      "name": "/{id}",
+      "regex": "\\d+",
+      "method": "deletePost"
+    }
+  },
+  "/admin/posts": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "postShow",
+    "role":"ROLE_ADMIN"
+  },
+  "/postEdit": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "show",
+    "role":"ROLE_ADMIN",
+    "sub_routes": {
+      "name": "/{id}",
+      "regex": "\\d+",
+      "method": "editPost"
+    }
+  },
+  "/postAdd": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "addPost",
+    "role":"ROLE_ADMIN"
+  },
+  "/users": {
+    "class": "\\App\\Controller\\Admin\\AdminController",
+    "method": "show",
+    "role":"ROLE_ADMIN",
+    "sub_routes": {
+      "name": "/{roleOrDelete}-{id}",
+      "regex": "\\w+-\\d+",
+      "method": "changeUserRole"
+    }
+  },
+  "/profile": {
+    "class": "\\App\\Controller\\UserController",
+    "method": "profile",
+    "session": true
+  },
+  "/profile/update_password": {
+    "class": "\\App\\Controller\\UserController",
+    "method": "updatePassword",
+    "session": true
+  },
+  "/forgot": {
+    "class": "\\App\\Controller\\UserController",
+    "method": "forgotPassword",
+    "session": false,
+    "sub_routes": {
+      "name": "/u:{id}",
+      "regex": "u:\\d+",
+      "method": "sendToken"
+    }
+  }
+}

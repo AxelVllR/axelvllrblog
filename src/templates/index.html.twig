@@ -1,0 +1,127 @@
+  {% include 'blocks/block_header.html.twig' %}
+    <!-- Hero Section-->
+    <section style="background: url(img/hero.jpg); background-size: cover; background-position: center center" class="hero">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 d-flex flex-column justify-content-center align-items-start">
+            <h1>Bienvenue sur mon Blog !</h1>
+              <div class="d-flex justify-content-center align-items-center">
+                  <div>
+                      <a href="/BlogFiles/CV.pdf" download="cv_axel_vallier.pdf" class="m-2 btn btn-dark">Mon CV</a>
+                  </div>
+                  <div>
+                      <a href="https://github.com/AxelVllR" target="_blank" class="m-2" style="font-size: 2em;"><i class="fab fa-github-alt"></i></a>
+                  </div>
+                  <div>
+                      <a href="https://www.linkedin.com/in/axel-vallier-555954187/" target="_blank" class="m-2" style="font-size: 2em;"><i class="fab fa-linkedin"></i></a>
+                  </div>
+              </div>
+          </div>
+        </div><a href=".intro" class="continue link-scroll"><i class="fa fa-long-arrow-down"></i> Scroll Down</a>
+      </div>
+    </section>
+    <!-- Intro Section-->
+    <section class="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h2 class="h3">Petite Introduction</h2>
+            <p class="text-big">J'<strong>adore</strong> le <strong>Développement Web</strong>. Mais j'aime aussi beaucoup l'ice tea et les burger..
+                Si vous aimez pisser du code et l'informatique en général, n'hésitez pas à créer un compte, intéragir avec les posts, etc..
+                Une fois votre compte crée, vous pourrez faire tout ce que vous voulez sur ce blog, enfin presque.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="featured-posts no-padding-top">
+      <div class="container">
+        <!-- Post-->
+        {% for post in newPosts %}
+          <div class="row d-flex align-items-stretch">
+            {% if post.image is defined and post.image is not null %}
+              <div class="image col-lg-5"><img src="/PostsImages/{{ post.image }}" alt="{{ post.title }} IMAGE"></div>
+            {% else %}
+              <div class="col-lg-5 d-flex flex-column justify-content-center align-items-center bg-light">
+                  <i class="far fa-images" style="font-size: 2em;"></i>
+                  <p class="text-dark mt-3">Image indisponible.</p>
+              </div>
+            {% endif %}
+            <div class="text col-lg-7">
+              <div class="text-inner d-flex align-items-center">
+                <div class="content">
+                  <header class="post-header">
+                    <div class="category"><a href="#">{{ post.category.name }}</a></div><a href="/blog/post-{{ post.id }}">
+                      <h2 class="h4">{{ post.title }}</h2></a>
+                  </header>
+                  <footer class="post-footer d-flex align-items-center"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="img/avatar-1.jpg" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>AxelVllR</span></div></a>
+                      {% set today = "now"|date("m/d/Y") %}
+                      {% set difference = date(post.created_at).diff(date(today)) %}
+                      {% if post.updated_at %}
+                          {% set difference = date(post.updated_at).diff(date(today)) %}
+                      {% endif %}
+                    <div class="date"><i class="icon-clock"></i> {% if difference.days > 0 %}{{ difference.days }} Jours{% elseif difference.days == 0 %}Aujourd'hui{% endif %}</div>
+                    <div class="comments"><i class="icon-comment"></i>{{ post.comments|length }}</div>
+                  </footer>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    <!-- Divider Section-->
+    <section style="background: url(img/divider-bg.jpg); background-size: cover; background-position: center bottom" class="divider">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <h2>Vous n'en avez pas assez ? Rendez vous dans la partie blog du site, vous trouverez votre bonheur.</h2><a href="/blog" class="hero-link">Voir le Blog</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Newsletter Section-->
+    <section class="newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Inscris toi à ma Newsletter</h2>
+            <p class="text-big">Tu souhaites recevoir toutes les nouvelles infos sur mon site ? inscris toi, je te promets que j'enverrais pas 50 mails par jours.. (peut-être 49..)</p>
+          </div>
+          <div class="col-md-8">
+            <div class="form-holder">
+              <form action="#">
+                <div class="form-group">
+                  <input type="email" name="email" id="email" placeholder="Type your email address">
+                  <button type="submit" class="submit">S'inscrire</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery Section-->
+    <section class="gallery no-padding">    
+      <div class="row">
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-1.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-1.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-2.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-2.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-3.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-3.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+        <div class="mix col-lg-3 col-md-3 col-sm-6">
+          <div class="item"><a href="img/gallery-4.jpg" data-fancybox="gallery" class="image"><img src="img/gallery-4.jpg" alt="..." class="img-fluid">
+              <div class="overlay d-flex align-items-center justify-content-center"><i class="icon-search"></i></div></a></div>
+        </div>
+      </div>
+    </section>
+    {% include 'blocks/block_footer.html.twig' %}
+    <!-- JavaScript files-->

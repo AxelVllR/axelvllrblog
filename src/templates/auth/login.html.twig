@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AxelVllR - Login</title>
+
+    <!-- Bootstrap core CSS -->
+    <script src="https://kit.fontawesome.com/e144745512.js" crossorigin="anonymous"></script>
+    <link href="http://localhost:8001/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+</head>
+
+<body class="text-center d-flex flex-column justify-content-center align-items-center" style="height: 100vh;background: linear-gradient(90deg, rgba(15,32,39,1) 0%, rgba(32,58,67,1) 35%, rgba(44,83,100,1) 100%); ">
+    <div class="d-flex flex-column justify-content-center align-items-center w-50">
+        <i class="fas fa-sign-in-alt m-4 text-white" style="font-size: 4em"></i>
+        <h1 class="h3 mb-3 font-weight-normal text-white">Connectez-vous</h1>
+        {% if error is defined and error != null %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+        {% endif %}
+        {% if success is defined and success != null %}
+            <div class="alert alert-success" role="alert">
+                {{ success }}
+            </div>
+        {% endif %}
+        {{ form | raw }}
+        <div class="mt-4">
+            <p class="text-white"><a class="btn btn-danger" href="/forgot">Mot de passe oublié</a></p>
+            <p class="text-white">Pas de compte ? <a class="text-danger" href="/sign-in">Inscrivez-vous</a>.</p>
+        </div>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
+    </div>
+</body>
+</html>

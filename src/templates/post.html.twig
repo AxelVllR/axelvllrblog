@@ -1,0 +1,103 @@
+{% include 'blocks/block_header.html.twig' %}
+<div class="container">
+    <div class="row">
+        <!-- Latest Posts -->
+        <main class="post blog-post col-lg-8">
+            <div class="container">
+                <div class="post-single">
+                    {% if post.image is defined and post.image is not null %}
+                    <div class="post-thumbnail">
+                        <img src="/PostsImages/{{ post.image }}" alt="{{ post.title }} Image" class="img-fluid">
+                    </div>
+                    {% endif %}
+                    <div class="post-details">
+                        <div class="post-meta d-flex justify-content-between">
+                            <div class="category"><a href="#">{{ post.category.name }}</a></div>
+                        </div>
+                        <h1>{{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                        {% if error is defined and error != null %}
+                            <div class="alert alert-danger" role="alert">
+                                {{ error }}
+                            </div>
+                        {% endif %}
+                        {% if success is defined and success != null %}
+                            <div class="alert alert-success" role="alert">
+                                {{ success }}
+                            </div>
+                        {% endif %}
+                        <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
+                                <div class="title"><span>{{ post.user.username }}</span></div>
+                            <div class="d-flex align-items-center flex-wrap">
+                                {% set today = "now"|date("m/d/Y") %}
+                                {% set difference = date(post.created_at).diff(date(today)) %}
+                                {% if post.updated_at %}
+                                    {% set difference = date(post.updated_at).diff(date(today)) %}
+                                {% endif %}
+                                <div class="date"><i class="icon-clock"></i> {% if difference.days > 0 %}{{ difference.days }} Jours{% elseif difference.days == 0 %}Aujourd'hui{% endif %}</div>
+                                <div class="views"><i class="icon-eye"></i> {{ post.views }}</div>
+                                <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments|length }}</div>
+                            </div>
+                        </div>
+                        <div class="post-body">
+                            {{ post.text|raw }}
+                        </div>
+                        <div class="post-comments">
+                            <header>
+                                <h3 class="h6">Commentaires<span class="no-of-comments">({{ post.comments|length }})</span></h3>
+                            </header>
+                            {% for comment in post.comments %}
+                            <div class="comment">
+                                <div class="comment-header d-flex justify-content-between">
+                                    <div class="user d-flex align-items-center">
+                                        <div class="image"><img src="http://localhost:8000/img/user.svg" alt="..." class="img-fluid rounded-circle"></div>
+                                        <div class="title"><strong>{{ comment.user.username }}</strong><span class="date">{{ comment.created_at|date("d/m/Y") }}</span></div>
+                                    </div>
+                                </div>
+                                <div class="comment-body">
+                                    <p>{{ comment.comment }}</p>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        {% if session is defined and session is not empty %}
+                        <div class="add-comment">
+                            <header>
+                                <h3 class="h6">Laissez un commentaire</h3>
+                            </header>
+                            {{ form | raw }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </main>
+        <aside class="col-lg-4">
+            <!-- Widget [Latest Posts Widget]        -->
+            <div class="widget latest-posts">
+                <header>
+                    <h3 class="h6">Derniers Articles</h3>
+                </header>
+                <div class="blog-posts">
+                    {% for latestPost in latestPosts %}
+                        {% if latestPost.id != post.id %}
+                            <a href="/blog/post-{{ latestPost.id }}">
+                                <div class="item d-flex align-items-center">
+                                    <div class="image d-flex align-items-center justify-content-center">
+                                        <img src="/PostsImages/{{ latestPost.image }}" alt="{{ latestPost.title }} Image" class="img-fluid">
+                                    </div>
+                                    <div class="title"><strong>{{ latestPost.title }}</strong>
+                                        <div class="d-flex align-items-center">
+                                            <div class="views"><i class="icon-eye"></i> {{ latestPost.views }}</div>
+                                            <div class="comments"><i class="icon-comment"></i>{{ latestPost.comments|length }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+               </div>
+            </div>
+        </aside>
+    </div>
+</div>
+{% include 'blocks/block_footer.html.twig' %}
