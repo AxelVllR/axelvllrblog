@@ -13,6 +13,7 @@ use App\Services\MailerManager;
 class AuthController {
 
     /**
+     * com
      * @var Renderer
      */
     private Renderer $renderer;
